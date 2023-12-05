@@ -31,4 +31,5 @@ public abstract class AppUser {
 
     @OneToOne(mappedBy = "appuser", cascade = CascadeType.ALL)
     protected BankAccount bankaccount;
+    
 }

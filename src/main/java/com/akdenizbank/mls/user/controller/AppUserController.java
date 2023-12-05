@@ -38,6 +38,17 @@ public class AppUserController {
     @DeleteMapping("/{id}")
     public GenericApiResponse deleteUser(@PathVariable String id) {
         this.appUserService.delete(id);
-        return new GenericApiResponse(200, "Success", "0001#0003");
+        return new GenericApiResponse(200, "Success", "0001#0003", "Successfully deleted");
     }
+
+    // HTTP REQUESTS
+    // GET - POST - PUT - DELETE - PATCH
+    // 200 -> ok
+    // 404 -> notfound
+    // 400 -> bad parameters
+    // 407 -> proxy auth required
+    // 500 -> internal server error
+
+    // CRUD
+
 }

@@ -46,6 +46,7 @@ public class CustomerUserController {
             throw new RuntimeException("No Such Customer");
         }
         customerInDB.setEmail(xaction.getEmail());
+        customerInDB = customerUserService.create(customerInDB);
         return new GenericApiResponse(200, "Success", "456897", customerInDB);
     }
 

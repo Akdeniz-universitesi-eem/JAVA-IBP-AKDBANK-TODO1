@@ -8,6 +8,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EmployeeUser extends AppUser {
-
     //TODO: Create Repository-Service-Controller for employee user
 }

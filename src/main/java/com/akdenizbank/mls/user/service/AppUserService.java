@@ -16,18 +16,22 @@ public class AppUserService {
         this.appUserRepository = appUserRepository;
     }
 
+    //CREATE
     public AppUser create(AppUser appUser) {
         return this.appUserRepository.save(appUser);
     }
 
+    //READ
     public AppUser getById(String id) {
         return this.appUserRepository.findById(id).orElse(null);
     }
 
+    //READ
     public Page<AppUser> getAll(Pageable pageable) {
         return this.appUserRepository.findAll(pageable);
     }
 
+    
     public void delete(String id) {
         AppUser userInDB = this.getById(id);
         if (userInDB == null) {
