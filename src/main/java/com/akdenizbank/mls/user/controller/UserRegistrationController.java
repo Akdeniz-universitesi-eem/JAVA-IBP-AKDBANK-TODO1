@@ -1,6 +1,7 @@
 package com.akdenizbank.mls.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import com.akdenizbank.mls.generic.rest.GenericApiResponse;
 import com.akdenizbank.mls.money.Currency;
 import com.akdenizbank.mls.money.Money;
 import com.akdenizbank.mls.user.CustomerUser;
+import com.akdenizbank.mls.user.EmployeeUser;
 import com.akdenizbank.mls.user.service.CustomerUserService;
 import com.akdenizbank.mls.util.RandomizerUtils;
 import com.akdenizbank.mls.util.TimeUtils;
@@ -53,4 +55,16 @@ public class UserRegistrationController {
     }
 
     //TODO : Register Employee user method
+    public GenericApiResponse createEmployee(@PathVariable String id) {
+        CustomerUser customerInDB = this.customerUserService.getById(id);
+        if (customerInDB == null) {
+            throw new RuntimeException("No Such User");
+        }
+        EmployeeUser employee = new EmployeeUser();
+        employee.setName(customerInDB.getName());
+        employee.setSurname(customerInDB.getSurname());
+        employee.setEmail(customerInDB.getEmail());
+
+        return new GenericApiResponse(200, "Success", "0002#0002", employee);
+    }
 }

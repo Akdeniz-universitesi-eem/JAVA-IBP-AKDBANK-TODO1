@@ -1,7 +1,5 @@
 package com.akdenizbank.mls.card.service;
 
-import javax.management.RuntimeErrorException;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,6 +18,15 @@ public class BankCardService {
 
     public BankCard create(BankCard bankCard) {
         return this.bankCardRepository.save(bankCard);
+    }
+
+    /* - */
+    public BankCard update(BankCard updatedBankCard) {
+        BankCard bankCardInDB = this.getById(null);
+        if (bankCardInDB == null) {
+            throw new RuntimeException("No Such Bank Card");
+        }
+        return this.bankCardRepository.save(updatedBankCard);
     }
 
     public BankCard getById(String id) {

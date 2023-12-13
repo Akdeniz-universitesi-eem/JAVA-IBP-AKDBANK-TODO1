@@ -20,6 +20,15 @@ public class BankAccountService {
         return this.bankAccountRepository.save(bankAccount);
     }
 
+    /* - */
+    public BankAccount update(BankAccount updatedBankAccount) {
+        BankAccount bankAccountInDB = this.getById(updatedBankAccount.getId());
+        if (bankAccountInDB == null) {
+            throw new RuntimeException("No Such Bank Account");
+        }
+        return this.bankAccountRepository.save(bankAccountInDB);
+    }
+
     public BankAccount getById(String id) {
         return this.bankAccountRepository.findById(id).orElse(null);
     }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,10 +40,18 @@ public class BankAccountController {
         appUserInDB.setBankaccount(bankAccount);
         bankAccountService.create(bankAccount);
         return new GenericApiResponse(200, "Success", "38974563", bankAccount);
-
     }
 
     // TODO: UPDATE BANK ACCOUNT METHOD
+    public GenericApiResponse updateBankAccount(@PathVariable String id, @RequestBody BankAccount updatedBankAccount) {
+        BankAccount bankAccountInDB = this.bankAccountService.getById(id);
+        if (bankAccountInDB == null) {
+            throw new RuntimeException("No Such Bank Account");
+        }
+        BankAccount updateBankAccount = bankAccountService.update(bankAccountInDB);
+        return new GenericApiResponse(200, "Success", "88974467", updateBankAccount);
+    }
+
     @GetMapping
     public GenericApiResponse getAllBankAccounts(Pageable pageable) {
         Page<BankAccount> bankAccountsPage = this.bankAccountService.getAll(pageable);
